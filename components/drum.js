@@ -44,7 +44,6 @@ class Drum extends HTMLElement {
     this.play();
   }
   play() {
-    console.log("Play hit");
     this.button.classList.add("playingAudio");
     this.player.load();
     this.player.play().catch((e) => {
@@ -52,7 +51,6 @@ class Drum extends HTMLElement {
     });
     this.player.onended = () => {
       this.button.classList.remove("playingAudio");
-      console.log("Audio has ended");
     };
   }
 }

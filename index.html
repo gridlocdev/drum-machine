@@ -57,6 +57,10 @@
         samples.forEach(element => {
             document.addEventListener('keydown', (evt) => {
                 if (evt.key === element.getAttribute("activation-key")) {
+                    samples.forEach(sample => {
+                        if (sample.getAttribute("isPlaying"))
+                            sample.stop()
+                    })
                     element.play()
                 }
             });

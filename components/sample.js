@@ -2,6 +2,7 @@ class Sample extends HTMLElement {
   activationKey = this.getAttribute("activation-key");
   audioSource = this.getAttribute("audio-source");
   volume = 0.5;
+  isPlaying;
 
   constructor() {
     super().attachShadow({ mode: "open" }).innerHTML = /*html*/ `
@@ -38,13 +39,15 @@ class Sample extends HTMLElement {
     this.player = this.shadowRoot.getElementById("player");
     this.button = this.shadowRoot.getElementById("button");
     this.player.volume = this.volume;
+    this.isPlaying = false;
+    this.setAttribute("isPlaying", this.isPlaying);
   }
 
   onclick() {
     this.play();
   }
   play() {
-    console.log("Play hit");
+    this.setAttribute("isPlaying", true);
     this.button.classList.add("playingAudio");
     this.player.load();
     this.player.play().catch((e) => {
@@ -52,8 +55,14 @@ class Sample extends HTMLElement {
     });
     this.player.onended = () => {
       this.button.classList.remove("playingAudio");
-      console.log("Audio has ended");
     };
+  }
+  stop() {
+    this.player.pause();
+    this.player.currentTime = 0;
+    if (this.button.classList.contains("playingAudio"))
+      this.button.classList.remove("playingAudio");
+    this.setAttribute("isPlaying", false);
   }
 }
 
