@@ -1,0 +1,23 @@
+:root {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.flex-centered-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.three-by-three-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}

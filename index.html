@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="flex-container">
+        <section name="drums" class="flex-centered-column">
+            <h1>Drums</h1>
+            <div class="three-by-three-grid" style="width: 500px">
+                <drum-element activation-key="q" audio-source="./assets/drums/1 - 808 1.mp3"></drum-element>
+                <drum-element activation-key="w" audio-source="./assets/drums/2 - 808 2.mp3"></drum-element>
+                <drum-element activation-key="e" audio-source="./assets/drums/3 - Triangle.mp3"></drum-element>
+                <drum-element activation-key="a" audio-source="./assets/drums/4 - Perc.mp3"></drum-element>
+                <drum-element activation-key="s" audio-source="./assets/drums/5 - Closed hat.mp3"></drum-element>
+                <drum-element activation-key="d" audio-source="./assets/drums/6 - Clap.mp3"></drum-element>
+                <drum-element activation-key="z" audio-source="./assets/drums/7 - Kick.mp3"></drum-element>
+                <drum-element activation-key="x" audio-source="./assets/drums/8 - Hi hat.mp3"></drum-element>
+                <drum-element activation-key="c" audio-source="./assets/drums/9 - Snare.mp3"></drum-element>
+            </div>
+        </section>
+        <section name="samples" class="flex-centered-column">
+            <h1>Samples</h1>
+            <div class="three-by-three-grid" style="width: 500px">
+                <!-- To be added -->
+                <drum-element activation-key="q" audio-source="./assets/drums/1 - 808 1.mp3"></drum-element>
+                <drum-element activation-key="w" audio-source="./assets/drums/2 - 808 2.mp3"></drum-element>
+                <drum-element activation-key="e" audio-source="./assets/drums/3 - Triangle.mp3"></drum-element>
+                <drum-element activation-key="a" audio-source="./assets/drums/4 - Perc.mp3"></drum-element>
+                <drum-element activation-key="s" audio-source="./assets/drums/5 - Closed hat.mp3"></drum-element>
+                <drum-element activation-key="d" audio-source="./assets/drums/6 - Clap.mp3"></drum-element>
+                <drum-element activation-key="z" audio-source="./assets/drums/7 - Kick.mp3"></drum-element>
+                <drum-element activation-key="x" audio-source="./assets/drums/8 - Hi hat.mp3"></drum-element>
+                <drum-element activation-key="c" audio-source="./assets/drums/9 - Snare.mp3"></drum-element>
+
+            </div>
+        </section>
+    </div>
+
+    <script src="./components/drum.js"></script>
+    <script>
+        let drums = document.querySelectorAll("drum-element");
+        drums.forEach(element => {
+            document.addEventListener('keydown', (evt) => {
+                if (evt.key === element.getAttribute("activation-key")) {
+                    element.play()
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
