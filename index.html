@@ -28,25 +28,33 @@
         <section name="samples" class="flex-centered-column">
             <h1>Samples</h1>
             <div class="three-by-three-grid" style="width: 500px">
-                <!-- To be added -->
-                <drum-element activation-key="q" audio-source="./assets/drums/1 - 808 1.mp3"></drum-element>
-                <drum-element activation-key="w" audio-source="./assets/drums/2 - 808 2.mp3"></drum-element>
-                <drum-element activation-key="e" audio-source="./assets/drums/3 - Triangle.mp3"></drum-element>
-                <drum-element activation-key="a" audio-source="./assets/drums/4 - Perc.mp3"></drum-element>
-                <drum-element activation-key="s" audio-source="./assets/drums/5 - Closed hat.mp3"></drum-element>
-                <drum-element activation-key="d" audio-source="./assets/drums/6 - Clap.mp3"></drum-element>
-                <drum-element activation-key="z" audio-source="./assets/drums/7 - Kick.mp3"></drum-element>
-                <drum-element activation-key="x" audio-source="./assets/drums/8 - Hi hat.mp3"></drum-element>
-                <drum-element activation-key="c" audio-source="./assets/drums/9 - Snare.mp3"></drum-element>
-
+                <sample-element activation-key="1" audio-source="./assets/samples/1 - Loop.mp3"></sample-element>
+                <sample-element activation-key="2" audio-source="./assets/samples/2 - Loop.mp3"></sample-element>
+                <sample-element activation-key="3" audio-source="./assets/samples/3 - Loop.mp3"></sample-element>
+                <sample-element activation-key="4" audio-source="./assets/samples/4 - Loop.mp3"></sample-element>
+                <sample-element activation-key="5" audio-source="./assets/samples/5 - Loop.mp3"></sample-element>
+                <sample-element activation-key="6" audio-source="./assets/samples/6 - Loop.mp3"></sample-element>
+                <sample-element activation-key="7" audio-source="./assets/samples/7 - Loop.mp3"></sample-element>
+                <sample-element activation-key="8" audio-source="./assets/samples/8 - Loop.mp3"></sample-element>
+                <sample-element activation-key="9" audio-source="./assets/samples/9 - Loop.mp3"></sample-element>
             </div>
         </section>
     </div>
 
     <script src="./components/drum.js"></script>
+    <script src="./components/sample.js"></script>
     <script>
         let drums = document.querySelectorAll("drum-element");
         drums.forEach(element => {
+            document.addEventListener('keydown', (evt) => {
+                if (evt.key === element.getAttribute("activation-key")) {
+                    element.play()
+                }
+            });
+        });
+
+        let samples = document.querySelectorAll("sample-element");
+        samples.forEach(element => {
             document.addEventListener('keydown', (evt) => {
                 if (evt.key === element.getAttribute("activation-key")) {
                     element.play()
