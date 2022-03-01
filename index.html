@@ -56,19 +56,20 @@
             element.play();
           }
         });
+        element.addEventListener("click", (evt) => {
+          element.play();
+        });
       });
 
       let samples = document.querySelectorAll("sample-element");
       samples.forEach((element) => {
         document.addEventListener("keydown", (evt) => {
           if (evt.key === element.getAttribute("activation-key")) {
-            samples.forEach((sample) => {
-              if (sample.getAttribute("is-playing") === "true") {
-                sample.stop();
-              }
-            });
-            element.play();
+            switchToSample(element);
           }
+        });
+        element.addEventListener("click", (evt) => {
+          switchToSample(element);
         });
       });
 
@@ -89,6 +90,15 @@
         samples.forEach((sample) => {
           sample.setAttribute("should-loop", sampleShouldLoop);
         });
+      }      
+
+      function switchToSample(element) {
+        samples.forEach((sample) => {
+          if (sample.getAttribute("is-playing") === "true") {
+            sample.stop();
+          }
+        });
+        element.play();
       }
     </script>
   </body>
