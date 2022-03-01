@@ -2,7 +2,6 @@ class Sample extends HTMLElement {
   activationKey = this.getAttribute("activation-key");
   audioSource = this.getAttribute("audio-source");
   volume = 0.5;
-  isPlaying;
 
   constructor() {
     super().attachShadow({ mode: "open" }).innerHTML = /*html*/ `
@@ -39,30 +38,38 @@ class Sample extends HTMLElement {
     this.player = this.shadowRoot.getElementById("player");
     this.button = this.shadowRoot.getElementById("button");
     this.player.volume = this.volume;
-    this.isPlaying = false;
-    this.setAttribute("isPlaying", this.isPlaying);
+    this.setAttribute("is-playing", false);
+    this.setAttribute("should-loop", true);
   }
 
   onclick() {
     this.play();
   }
   play() {
-    this.setAttribute("isPlaying", true);
-    this.button.classList.add("playingAudio");
+    this.setAttribute("is-playing", true);
+    if (!this.button.classList.contains("playingAudio")) {
+      this.button.classList.add("playingAudio");
+    }
     this.player.load();
     this.player.play().catch((e) => {
       console.error(`Error caught: ${e}`);
     });
     this.player.onended = () => {
-      this.button.classList.remove("playingAudio");
+      this.setAttribute("is-playing", false);
+      if (this.getAttribute("should-loop") === "true" && this.getAttribute("is-playing") === "false") {
+        this.play();
+      } else {
+        this.stop();
+      }
     };
   }
   stop() {
     this.player.pause();
     this.player.currentTime = 0;
-    if (this.button.classList.contains("playingAudio"))
+
+    if (this.button.classList.contains("playingAudio")) {
       this.button.classList.remove("playingAudio");
-    this.setAttribute("isPlaying", false);
+    }
   }
 }
 
