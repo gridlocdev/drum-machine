@@ -8,6 +8,11 @@
   justify-content: space-evenly;
   gap: 10px;
 }
+@media screen and (max-width: 1000px) {
+ .flex-container {
+   flex-direction: column;
+ } 
+}
 
 .flex-centered-column {
   display: flex;
