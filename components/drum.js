@@ -30,7 +30,7 @@ class Drum extends HTMLElement {
           transition: 0.3s;
         }
         button:hover, button:active, button.playingAudio  {
-          background-color: #00aa8c;
+          background-color: #00c09d;
         }
         </style>
       `;

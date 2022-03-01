@@ -1,5 +1,7 @@
 :root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #191919;
+  color: white;
 }
 
 .flex-container {
@@ -9,9 +11,9 @@
   gap: 10px;
 }
 @media screen and (max-width: 1000px) {
- .flex-container {
-   flex-direction: column;
- } 
+  .flex-container {
+    flex-direction: column;
+  }
 }
 
 .flex-centered-column {
