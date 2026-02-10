@@ -1,12 +1,15 @@
 class Sample extends HTMLElement {
-  static get observedAttributes() {
-    return ["should-loop"];
-  }
-
   activationKey = this.getAttribute("activation-key");
   audioSource = this.getAttribute("audio-source");
   volume = 0.5;
   currentSource = null;
+  audioBuffer = null;
+  reversedBuffer = null;
+  isPaused = false;
+  pauseOffset = 0;
+  startTime = 0;
+  _playbackRate = 1;
+  _isReversed = false;
 
   constructor() {
     super().attachShadow({ mode: "open" }).innerHTML = /*html*/ `
@@ -38,62 +41,125 @@ class Sample extends HTMLElement {
 
     this.button = this.shadowRoot.getElementById("button");
     this.setAttribute("is-playing", false);
-    this.setAttribute("should-loop", true);
   }
 
   connectedCallback() {
-    const { context, loadAudioBuffer } = window.drumMachineAudio;
+    const { context, loadAudioBuffer, reverseAudioBuffer } = window.drumMachineAudio;
     this.gainNode = context.createGain();
     this.gainNode.gain.value = this.volume;
     this.gainNode.connect(context.destination);
 
     loadAudioBuffer(this.audioSource).then((buffer) => {
       this.audioBuffer = buffer;
+      this.reversedBuffer = reverseAudioBuffer(buffer);
     });
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "should-loop" && this.currentSource) {
-      this.currentSource.loop = newValue === "true";
-    }
-  }
-
-  onclick() {
-    this.play();
-  }
-  play() {
+  play({ reverse = false, speed = 1 } = {}) {
     if (!this.audioBuffer) return;
 
-    // Stop any currently playing source
-    if (this.currentSource) {
-      this.currentSource.onended = null;
-      this.currentSource.stop();
-      this.currentSource = null;
-    }
+    this.fullStop();
 
+    this._isReversed = reverse;
+    this._playbackRate = speed;
+    this.isPaused = false;
+    this.pauseOffset = 0;
+
+    this._startSource(0);
+  }
+
+  _startSource(offset) {
     const { context } = window.drumMachineAudio;
     const source = context.createBufferSource();
-    source.buffer = this.audioBuffer;
-    source.loop = this.getAttribute("should-loop") === "true";
+    source.buffer = this._isReversed ? this.reversedBuffer : this.audioBuffer;
+    source.loop = true;
+    source.playbackRate.value = this._playbackRate;
     source.connect(this.gainNode);
 
     source.onended = () => {
-      this.currentSource = null;
-      this.setAttribute("is-playing", false);
-      this.button.classList.remove("playingAudio");
+      if (this.currentSource === source) {
+        this.currentSource = null;
+      }
     };
 
     this.currentSource = source;
+    this.startTime = context.currentTime - (offset / this._playbackRate);
     this.setAttribute("is-playing", true);
     this.button.classList.add("playingAudio");
-    source.start(0);
+    source.start(0, offset);
   }
+
+  _getCurrentOffset() {
+    if (!this.audioBuffer) return 0;
+    const { context } = window.drumMachineAudio;
+    const duration = this.audioBuffer.duration;
+    const elapsed = (context.currentTime - this.startTime) * this._playbackRate;
+    return ((elapsed % duration) + duration) % duration;
+  }
+
+  pause() {
+    if (!this.currentSource || this.isPaused) return;
+
+    this.pauseOffset = this._getCurrentOffset();
+    this.currentSource.onended = null;
+    this.currentSource.stop();
+    this.currentSource = null;
+    this.isPaused = true;
+    // Keep is-playing and CSS highlight — still the "active" sample
+  }
+
+  resume() {
+    if (!this.isPaused) return;
+
+    this.isPaused = false;
+    this._startSource(this.pauseOffset);
+  }
+
+  setSpeed(speed) {
+    this._playbackRate = speed;
+    if (this.currentSource && !this.isPaused) {
+      // Recalculate startTime so offset math stays correct
+      const offset = this._getCurrentOffset();
+      this.currentSource.playbackRate.value = speed;
+      const { context } = window.drumMachineAudio;
+      this.startTime = context.currentTime - (offset / speed);
+    }
+    // If paused, the stored pauseOffset remains valid; new rate applies on resume
+  }
+
+  setReverse(reverse) {
+    if (this._isReversed === reverse) return;
+
+    const duration = this.audioBuffer ? this.audioBuffer.duration : 0;
+
+    if (this.isPaused) {
+      this.pauseOffset = duration - this.pauseOffset;
+      this._isReversed = reverse;
+    } else if (this.currentSource) {
+      const offset = this._getCurrentOffset();
+      const mirroredOffset = duration - offset;
+      this.currentSource.onended = null;
+      this.currentSource.stop();
+      this.currentSource = null;
+      this._isReversed = reverse;
+      this._startSource(mirroredOffset);
+    } else {
+      this._isReversed = reverse;
+    }
+  }
+
   stop() {
+    this.fullStop();
+  }
+
+  fullStop() {
     if (this.currentSource) {
       this.currentSource.onended = null;
       this.currentSource.stop();
       this.currentSource = null;
     }
+    this.isPaused = false;
+    this.pauseOffset = 0;
     this.setAttribute("is-playing", false);
     this.button.classList.remove("playingAudio");
   }

@@ -26,11 +26,11 @@
       </div>
     </section>
     <section name="samples">
-      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 6px;">
-        <h3 style="margin: 0; text-align: center;">Samples</h3>
-        <aside style="font-size: 0.8em;">
-          Loop <input type="checkbox" id="samplesLoopCheckbox" /> (<kbd>0</kbd>)
-        </aside>
+      <h3 style="margin: 0 0 4px; text-align: center;">Samples</h3>
+      <div class="transport-controls">
+        <button id="transportReverse" class="transport-btn" title="Reverse (R)">◁</button>
+        <button id="transportPlayPause" class="transport-btn" title="Play/Pause (Space)">▶</button>
+        <button id="transportSpeed" class="transport-btn transport-speed" title="Speed (F)">1x</button>
       </div>
       <div class="sample-row">
         <sample-element activation-key="1" audio-source="./assets/samples/1 - Loop.mp3"></sample-element>
