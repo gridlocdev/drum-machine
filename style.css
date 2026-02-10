@@ -76,9 +76,51 @@ section[name="samples"] {
   color: #191919;
 }
 
-.transport-speed {
-  border-radius: 16px;
-  width: auto;
-  padding: 0 10px;
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.speed-control input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.speed-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00c09d;
+  border: none;
+  cursor: pointer;
+}
+
+.speed-control input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00c09d;
+  border: none;
+  cursor: pointer;
+}
+
+.speed-control input[type="range"]:focus {
+  outline: 2px solid #00c09d;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+#speedLabel {
+  font-size: 0.8em;
+  color: #00c09d;
   font-weight: bold;
+  min-width: 2.5em;
 }

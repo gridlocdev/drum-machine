@@ -14,12 +14,11 @@ let samples = document.querySelectorAll("sample-element");
 let activeSample = null;
 let isReversed = false;
 let currentSpeed = 1;
-const speedOptions = [1, 1.5, 2];
-let speedIndex = 0;
 
 const btnReverse = document.getElementById("transportReverse");
 const btnPlayPause = document.getElementById("transportPlayPause");
-const btnSpeed = document.getElementById("transportSpeed");
+const sliderSpeed = document.getElementById("transportSpeed");
+const speedLabel = document.getElementById("speedLabel");
 
 samples.forEach((element) => {
   document.addEventListener("keydown", (evt) => {
@@ -65,11 +64,14 @@ function togglePlayPause() {
 }
 
 // Speed
-btnSpeed.addEventListener("click", () => cycleSpeed());
-function cycleSpeed() {
-  speedIndex = (speedIndex + 1) % speedOptions.length;
-  currentSpeed = speedOptions[speedIndex];
-  btnSpeed.textContent = currentSpeed === 1 ? "1x" : currentSpeed + "x";
+sliderSpeed.addEventListener("input", () => {
+  setSpeed(parseFloat(sliderSpeed.value));
+});
+
+function setSpeed(speed) {
+  currentSpeed = Math.round(speed * 10) / 10;
+  sliderSpeed.value = currentSpeed;
+  speedLabel.textContent = currentSpeed + "x";
   if (activeSample && activeSample.getAttribute("is-playing") === "true") {
     activeSample.setSpeed(currentSpeed);
   }
@@ -83,6 +85,6 @@ document.addEventListener("keydown", (evt) => {
     evt.preventDefault();
     togglePlayPause();
   } else if (evt.key === "f") {
-    cycleSpeed();
+    sliderSpeed.focus();
   }
 });
