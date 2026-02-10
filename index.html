@@ -25,15 +25,14 @@
         <drum-element activation-key="c" audio-source="./assets/drums/9 - Snare.mp3"></drum-element>
       </div>
     </section>
-    <section name="samples" class="flex-centered-column">
-      <div style="width: 100%; display: grid; grid-template-columns: repeat(3, 1fr)">
-        <empty></empty>
-        <h1 style="text-align: center">Samples</h1>
-        <aside style="text-align: end; align-self: center">
-          Should Loop <input type="checkbox" id="samplesLoopCheckbox" /> <br />(Press <kbd>0</kbd> to toggle)
+    <section name="samples">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 6px;">
+        <h3 style="margin: 0; text-align: center;">Samples</h3>
+        <aside style="font-size: 0.8em;">
+          Loop <input type="checkbox" id="samplesLoopCheckbox" /> (<kbd>0</kbd>)
         </aside>
       </div>
-      <div class="three-by-three-grid" style="width: 500px">
+      <div class="sample-row">
         <sample-element activation-key="1" audio-source="./assets/samples/1 - Loop.mp3"></sample-element>
         <sample-element activation-key="2" audio-source="./assets/samples/2 - Loop.mp3"></sample-element>
         <sample-element activation-key="3" audio-source="./assets/samples/3 - Loop.mp3"></sample-element>
