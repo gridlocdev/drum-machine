@@ -1,7 +1,12 @@
 class Sample extends HTMLElement {
+  static get observedAttributes() {
+    return ["should-loop"];
+  }
+
   activationKey = this.getAttribute("activation-key");
   audioSource = this.getAttribute("audio-source");
   volume = 0.5;
+  currentSource = null;
 
   constructor() {
     super().attachShadow({ mode: "open" }).innerHTML = /*html*/ `
@@ -10,10 +15,6 @@ class Sample extends HTMLElement {
           ${this.activationKey}
         </span>
       </button>
-      
-      <audio id="player">
-        <source id="playerSource" src="${this.audioSource}">
-      </audio>
 
       <style>
         button {
@@ -35,41 +36,66 @@ class Sample extends HTMLElement {
         </style>
       `;
 
-    this.player = this.shadowRoot.getElementById("player");
     this.button = this.shadowRoot.getElementById("button");
-    this.player.volume = this.volume;
     this.setAttribute("is-playing", false);
     this.setAttribute("should-loop", true);
+  }
+
+  connectedCallback() {
+    const { context, loadAudioBuffer } = window.drumMachineAudio;
+    this.gainNode = context.createGain();
+    this.gainNode.gain.value = this.volume;
+    this.gainNode.connect(context.destination);
+
+    loadAudioBuffer(this.audioSource).then((buffer) => {
+      this.audioBuffer = buffer;
+    });
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "should-loop" && this.currentSource) {
+      this.currentSource.loop = newValue === "true";
+    }
   }
 
   onclick() {
     this.play();
   }
   play() {
-    this.setAttribute("is-playing", true);
-    if (!this.button.classList.contains("playingAudio")) {
-      this.button.classList.add("playingAudio");
+    if (!this.audioBuffer) return;
+
+    // Stop any currently playing source
+    if (this.currentSource) {
+      this.currentSource.onended = null;
+      this.currentSource.stop();
+      this.currentSource = null;
     }
-    this.player.load();
-    this.player.play().catch((e) => {
-      console.error(`Error caught: ${e}`);
-    });
-    this.player.onended = () => {
+
+    const { context } = window.drumMachineAudio;
+    const source = context.createBufferSource();
+    source.buffer = this.audioBuffer;
+    source.loop = this.getAttribute("should-loop") === "true";
+    source.connect(this.gainNode);
+
+    source.onended = () => {
+      this.currentSource = null;
       this.setAttribute("is-playing", false);
-      if (this.getAttribute("should-loop") === "true" && this.getAttribute("is-playing") === "false") {
-        this.play();
-      } else {
-        this.stop();
-      }
+      this.button.classList.remove("playingAudio");
     };
+
+    this.currentSource = source;
+    this.setAttribute("is-playing", true);
+    this.button.classList.add("playingAudio");
+    source.start(0);
   }
   stop() {
-    this.player.pause();
-    this.player.currentTime = 0;
-
-    if (this.button.classList.contains("playingAudio")) {
-      this.button.classList.remove("playingAudio");
+    if (this.currentSource) {
+      this.currentSource.onended = null;
+      this.currentSource.stop();
+      this.currentSource = null;
     }
+    this.setAttribute("is-playing", false);
+    this.button.classList.remove("playingAudio");
   }
 }
 

@@ -10,10 +10,6 @@ class Drum extends HTMLElement {
           ${this.activationKey}
         </span>
       </button>
-      
-      <audio id="player">
-        <source id="playerSource" src="${this.audioSource}">
-      </audio>
 
       <style>
         button {
@@ -35,23 +31,37 @@ class Drum extends HTMLElement {
         </style>
       `;
 
-    this.player = this.shadowRoot.getElementById("player");
     this.button = this.shadowRoot.getElementById("button");
-    this.player.volume = this.volume;
+  }
+
+  connectedCallback() {
+    const { context, loadAudioBuffer } = window.drumMachineAudio;
+    this.gainNode = context.createGain();
+    this.gainNode.gain.value = this.volume;
+    this.gainNode.connect(context.destination);
+
+    loadAudioBuffer(this.audioSource).then((buffer) => {
+      this.audioBuffer = buffer;
+    });
   }
 
   onclick() {
     this.play();
   }
   play() {
+    if (!this.audioBuffer) return;
+
+    const { context } = window.drumMachineAudio;
+    const source = context.createBufferSource();
+    source.buffer = this.audioBuffer;
+    source.connect(this.gainNode);
+
     this.button.classList.add("playingAudio");
-    this.player.load();
-    this.player.play().catch((e) => {
-      console.error(`Error caught: ${e}`);
-    });
-    this.player.onended = () => {
+    source.onended = () => {
       this.button.classList.remove("playingAudio");
     };
+
+    source.start(0);
   }
 }
 
