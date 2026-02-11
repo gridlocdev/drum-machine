@@ -148,6 +148,25 @@ class Sample extends HTMLElement {
     }
   }
 
+  getProgress() {
+    if (!this.audioBuffer) return 0;
+    let raw;
+    if (this.isPaused) {
+      raw = this.pauseOffset / this.audioBuffer.duration;
+    } else if (!this.currentSource) {
+      return 0;
+    } else {
+      raw = this._getCurrentOffset() / this.audioBuffer.duration;
+    }
+    return this._isReversed ? 1 - raw : raw;
+  }
+
+  getSampleName() {
+    const path = this.audioSource || "";
+    const filename = path.split("/").pop() || "";
+    return filename.replace(/\.\w+$/, "");
+  }
+
   stop() {
     this.fullStop();
   }

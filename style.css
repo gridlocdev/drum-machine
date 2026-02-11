@@ -10,7 +10,7 @@
   align-items: center;
   min-height: 100vh;
   box-sizing: border-box;
-  padding-bottom: 160px;
+  padding-bottom: 60px;
 }
 
 .flex-centered-column {
@@ -24,20 +24,106 @@ section[name="drums"] {
   flex: 1;
 }
 
-section[name="samples"] {
+.samples-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0 16px 16px;
+}
+
+.samples-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.samples-dropdown-wrapper {
+  position: relative;
+}
+
+.samples-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #222;
+  color: #00c09d;
+  border: 2px solid #00c09d;
+  border-radius: 6px;
+  padding: 6px 10px 6px 14px;
+  font-family: inherit;
+  font-size: 0.85em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.15s;
+  min-width: 120px;
+}
+
+.samples-select:hover,
+.samples-select.open {
+  background: #00c09d;
+  color: #191919;
+}
+
+.samples-arrow {
+  margin-left: auto;
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+.sample-progress-track {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 10px 20px 20px;
+  height: 6px;
+  background: #333;
+  overflow: hidden;
 }
 
-.sample-row {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 3px;
-  max-width: 900px;
-  margin: 0 auto;
+.sample-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #00c09d;
+  transition: none;
+}
+
+.samples-menu {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  min-width: 180px;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 4px 0;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.samples-menu.open {
+  display: block;
+}
+
+.sample-item {
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.1s;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sample-item:hover {
+  background: #2a2a2a;
+}
+
+.sample-item.active {
+  color: #00c09d;
+}
+
+.sample-item-key {
+  opacity: 0.4;
+  font-size: 0.85em;
 }
 
 .three-by-three-grid {
@@ -48,9 +134,8 @@ section[name="samples"] {
 
 .transport-controls {
   display: flex;
-  justify-content: center;
+  align-items: center;
   gap: 8px;
-  margin-bottom: 6px;
 }
 
 .transport-btn {
