@@ -180,6 +180,13 @@ section[name="drums"] {
   color: #191919;
 }
 
+#transportReverse span {
+  font-size: 1.5em;
+  line-height: 0;
+  display: block;
+  transform: translateY(-0.25rem);
+}
+
 .transport-btn-play {
   width: 56px;
   height: 56px;
