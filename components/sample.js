@@ -47,7 +47,7 @@ class Sample extends HTMLElement {
     const { context, loadAudioBuffer, reverseAudioBuffer } = window.drumMachineAudio;
     this.gainNode = context.createGain();
     this.gainNode.gain.value = this.volume;
-    this.gainNode.connect(context.destination);
+    this.gainNode.connect(window.drumMachineAudio.masterGain);
 
     loadAudioBuffer(this.audioSource).then((buffer) => {
       this.audioBuffer = buffer;

@@ -175,8 +175,30 @@ document.addEventListener("keydown", (evt) => {
   } else if (evt.key === "ArrowRight") {
     evt.preventDefault();
     setSpeed(currentSpeed + 0.1);
+  } else if (evt.key === "ArrowUp") {
+    evt.preventDefault();
+    setVolume(parseFloat(masterVolumeSlider.value) + 0.05);
+  } else if (evt.key === "ArrowDown") {
+    evt.preventDefault();
+    setVolume(parseFloat(masterVolumeSlider.value) - 0.05);
   }
 });
+
+// Master volume
+const masterVolumeSlider = document.getElementById("masterVolume");
+const { masterGain } = window.drumMachineAudio;
+
+masterVolumeSlider.addEventListener("input", () => {
+  setVolume(parseFloat(masterVolumeSlider.value));
+});
+
+function setVolume(v) {
+  v = Math.min(1, Math.max(0, Math.round(v * 100) / 100));
+  masterVolumeSlider.value = v;
+  const { context } = window.drumMachineAudio;
+  masterGain.gain.cancelScheduledValues(0);
+  masterGain.gain.setValueAtTime(v, context.currentTime);
+}
 
 // Progress bar animation — single bar under the select
 function updateProgressBar() {

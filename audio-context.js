@@ -45,5 +45,8 @@ window.drumMachineAudio = (() => {
     return reversed;
   }
 
-  return { context, loadAudioBuffer, reverseAudioBuffer };
+  const masterGain = context.createGain();
+  masterGain.connect(context.destination);
+
+  return { context, loadAudioBuffer, reverseAudioBuffer, masterGain };
 })();
