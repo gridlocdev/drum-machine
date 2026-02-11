@@ -305,7 +305,6 @@ section[name="drums"] {
   position: fixed;
   top: 16px;
   right: 16px;
-  width: 48px;
   height: 48px;
   background: rgba(40, 40, 40, 0.45);
   backdrop-filter: blur(12px);
@@ -317,8 +316,20 @@ section[name="drums"] {
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0;
+  gap: 8px;
+  padding: 0 14px 0 10px;
+}
+
+.shortcuts-label {
+  font-family: inherit;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.4);
+  transition: 0.15s;
+}
+
+.shortcuts-btn:hover .shortcuts-label {
+  color: #00c09d;
 }
 
 .shortcuts-btn:hover {
