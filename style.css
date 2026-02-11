@@ -41,14 +41,25 @@ section[name="drums"] {
 }
 
 .toolbar-controls {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
 }
 
-.toolbar-spacer {
-  flex: 1;
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .samples-dropdown-wrapper {
@@ -103,7 +114,8 @@ section[name="drums"] {
   display: none;
   position: absolute;
   bottom: calc(100% + 6px);
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   min-width: 180px;
   background: #222;
   border: 1px solid #333;

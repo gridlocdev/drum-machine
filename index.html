@@ -38,6 +38,10 @@
     </div>
     <div class="samples-toolbar">
       <div class="toolbar-controls">
+        <div class="toolbar-left">
+          <button id="transportPlayPause" class="transport-btn transport-btn-play" title="Play/Pause (Space)">▶</button>
+          <button id="transportReverse" class="transport-btn" title="Reverse (R)">◁</button>
+        </div>
         <div class="samples-dropdown-wrapper">
           <button class="samples-select" id="samplesTrigger">
             <span id="samplesLabel">-- Select a sample --</span>
@@ -45,17 +49,16 @@
           </button>
           <div class="samples-menu" id="samplesMenu"></div>
         </div>
-        <button id="transportReverse" class="transport-btn" title="Reverse (R)">◁</button>
-        <button id="transportPlayPause" class="transport-btn transport-btn-play" title="Play/Pause (Space)">▶</button>
-        <label class="speed-control">
-          <input id="transportSpeed" type="range" min="0.1" max="3" step="0.1" value="1" title="Speed (←→)" />
-          <span id="speedLabel">1x</span>
-        </label>
-        <div class="toolbar-spacer"></div>
-        <label class="volume-control">
-          <span class="volume-label">Volume</span>
-          <input id="masterVolume" type="range" min="0" max="1" step="0.01" value="1" title="Master Volume" />
-        </label>
+        <div class="toolbar-right">
+          <label class="speed-control">
+            <input id="transportSpeed" type="range" min="0.1" max="3" step="0.1" value="1" title="Speed (←→)" />
+            <span id="speedLabel">1x</span>
+          </label>
+          <label class="volume-control">
+            <span class="volume-label">Volume</span>
+            <input id="masterVolume" type="range" min="0" max="1" step="0.01" value="1" title="Master Volume" />
+          </label>
+        </div>
       </div>
     </div>
     <div class="sample-progress-track">
