@@ -24,14 +24,21 @@ section[name="drums"] {
   flex: 1;
 }
 
-.samples-panel {
+.samples-toolbar {
   position: fixed;
-  bottom: 0;
+  bottom: 6px;
   left: 0;
-  padding: 0 16px 16px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 16px 20px 20px;
+  background: rgba(40, 40, 40, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.samples-bar {
+.toolbar-controls {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -128,24 +135,18 @@ section[name="drums"] {
 
 .three-by-three-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 60px);
   gap: 3px;
 }
 
-.transport-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .transport-btn {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: transparent;
   border: 2px solid #00c09d;
   color: #00c09d;
-  font-size: 0.85em;
+  font-size: 1.1em;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -153,12 +154,19 @@ section[name="drums"] {
   padding: 0;
   font-family: inherit;
   transition: 0.15s;
+  flex-shrink: 0;
 }
 
 .transport-btn:hover,
 .transport-btn.active {
   background: #00c09d;
   color: #191919;
+}
+
+.transport-btn-play {
+  width: 56px;
+  height: 56px;
+  font-size: 1.5em;
 }
 
 .speed-control {
@@ -170,18 +178,18 @@ section[name="drums"] {
 .speed-control input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  width: 80px;
-  height: 6px;
-  background: #333;
-  border-radius: 3px;
+  width: 100px;
+  height: 8px;
+  background: #111;
+  border-radius: 4px;
   outline: none;
   cursor: pointer;
 }
 
 .speed-control input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #00c09d;
   border: none;
@@ -189,8 +197,8 @@ section[name="drums"] {
 }
 
 .speed-control input[type="range"]::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #00c09d;
   border: none;
@@ -200,11 +208,11 @@ section[name="drums"] {
 .speed-control input[type="range"]:focus {
   outline: 2px solid #00c09d;
   outline-offset: 2px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 #speedLabel {
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #00c09d;
   font-weight: bold;
   min-width: 2.5em;

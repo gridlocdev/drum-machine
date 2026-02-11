@@ -123,7 +123,7 @@ sliderSpeed.addEventListener("input", () => {
 });
 
 function setSpeed(speed) {
-  currentSpeed = Math.round(speed * 10) / 10;
+  currentSpeed = Math.min(3, Math.max(0.1, Math.round(speed * 10) / 10));
   sliderSpeed.value = currentSpeed;
   speedLabel.textContent = currentSpeed + "x";
   if (activeSample && activeSample.getAttribute("is-playing") === "true") {
@@ -138,8 +138,12 @@ document.addEventListener("keydown", (evt) => {
   } else if (evt.key === " ") {
     evt.preventDefault();
     togglePlayPause();
-  } else if (evt.key === "f") {
-    sliderSpeed.focus();
+  } else if (evt.key === "ArrowLeft") {
+    evt.preventDefault();
+    setSpeed(currentSpeed - 0.1);
+  } else if (evt.key === "ArrowRight") {
+    evt.preventDefault();
+    setSpeed(currentSpeed + 0.1);
   }
 });
 
