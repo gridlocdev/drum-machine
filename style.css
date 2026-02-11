@@ -217,3 +217,154 @@ section[name="drums"] {
   font-weight: bold;
   min-width: 2.5em;
 }
+
+/* --- Shortcuts button --- */
+
+.shortcuts-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background: rgba(40, 40, 40, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.15s;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.shortcuts-btn:hover {
+  border-color: #00c09d;
+}
+
+.shortcuts-btn:hover .shortcuts-icon {
+  color: #00c09d;
+  border-color: #00c09d;
+}
+
+.shortcuts-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4);
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s;
+}
+
+/* --- Shortcuts modal --- */
+
+.shortcuts-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+}
+
+.shortcuts-modal-overlay.open {
+  display: flex;
+}
+
+.shortcuts-modal {
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 24px 32px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.shortcuts-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.shortcuts-modal-header h2 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #fff;
+}
+
+.shortcuts-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.shortcuts-close:hover {
+  color: #fff;
+}
+
+.shortcuts-columns {
+  display: flex;
+  gap: 32px;
+}
+
+.shortcuts-group h3 {
+  margin: 0 0 8px;
+  font-size: 0.85em;
+  color: #00c09d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.shortcuts-group h3:not(:first-child) {
+  margin-top: 16px;
+}
+
+.shortcuts-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.shortcuts-group li {
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 3px 0;
+}
+
+kbd {
+  display: inline-block;
+  background: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: inherit;
+  font-size: 0.9em;
+  color: #fff;
+  min-width: 1.4em;
+  text-align: center;
+  margin-right: 6px;
+}
+
+/* Hide on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .shortcuts-btn {
+    display: none;
+  }
+}

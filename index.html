@@ -58,6 +58,47 @@
     </div>
   </div>
 
+  <button class="shortcuts-btn" id="shortcutsBtn" title="Keyboard Shortcuts"><span class="shortcuts-icon">?</span></button>
+
+  <div class="shortcuts-modal-overlay" id="shortcutsOverlay">
+    <div class="shortcuts-modal">
+      <div class="shortcuts-modal-header">
+        <h2>Keyboard Shortcuts</h2>
+        <button class="shortcuts-close" id="shortcutsClose">&times;</button>
+      </div>
+      <div class="shortcuts-columns">
+        <div class="shortcuts-group">
+          <h3>Drums</h3>
+          <ul>
+            <li><kbd>Q</kbd> 808 1</li>
+            <li><kbd>W</kbd> 808 2</li>
+            <li><kbd>E</kbd> Triangle</li>
+            <li><kbd>A</kbd> Perc</li>
+            <li><kbd>S</kbd> Closed hat</li>
+            <li><kbd>D</kbd> Clap</li>
+            <li><kbd>Z</kbd> Kick</li>
+            <li><kbd>X</kbd> Hi hat</li>
+            <li><kbd>C</kbd> Snare</li>
+          </ul>
+        </div>
+        <div class="shortcuts-group">
+          <h3>Samples</h3>
+          <ul>
+            <li><kbd>1</kbd> &ndash; <kbd>9</kbd> Select &amp; play sample</li>
+          </ul>
+          <h3>Transport</h3>
+          <ul>
+            <li><kbd>Space</kbd> Play / Pause</li>
+            <li><kbd>R</kbd> Toggle reverse</li>
+            <li><kbd>&larr;</kbd> Slow down</li>
+            <li><kbd>&rarr;</kbd> Speed up</li>
+            <li><kbd>?</kbd> Toggle this dialog</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="./audio-context.js"></script>
   <script src="./components/drum.js"></script>
   <script src="./components/sample.js"></script>

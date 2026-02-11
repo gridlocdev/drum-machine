@@ -1,6 +1,27 @@
+// --- Shortcuts modal ---
+
+let shortcutsOpen = false;
+const shortcutsBtn = document.getElementById("shortcutsBtn");
+const shortcutsOverlay = document.getElementById("shortcutsOverlay");
+const shortcutsClose = document.getElementById("shortcutsClose");
+
+function toggleShortcutsModal(forceOpen) {
+  shortcutsOpen = forceOpen !== undefined ? forceOpen : !shortcutsOpen;
+  shortcutsOverlay.classList.toggle("open", shortcutsOpen);
+}
+
+shortcutsBtn.addEventListener("click", () => toggleShortcutsModal());
+shortcutsClose.addEventListener("click", () => toggleShortcutsModal(false));
+shortcutsOverlay.addEventListener("click", (evt) => {
+  if (evt.target === shortcutsOverlay) toggleShortcutsModal(false);
+});
+
+// --- Drums ---
+
 let drums = document.querySelectorAll("drum-element");
 drums.forEach((element) => {
   document.addEventListener("keydown", (evt) => {
+    if (shortcutsOpen) return;
     if (evt.key === element.getAttribute("activation-key")) {
       element.play();
     }
@@ -73,6 +94,7 @@ document.addEventListener("click", (evt) => {
 // Sample activation
 samples.forEach((element) => {
   document.addEventListener("keydown", (evt) => {
+    if (shortcutsOpen) return;
     if (evt.key === element.getAttribute("activation-key")) {
       switchToSample(element);
     }
@@ -133,6 +155,15 @@ function setSpeed(speed) {
 
 // Keyboard shortcuts
 document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape" && shortcutsOpen) {
+    toggleShortcutsModal(false);
+    return;
+  }
+  if (evt.key === "?") {
+    toggleShortcutsModal();
+    return;
+  }
+  if (shortcutsOpen) return;
   if (evt.key === "r") {
     toggleReverse();
   } else if (evt.key === " ") {
