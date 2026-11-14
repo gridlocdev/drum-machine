@@ -2,7 +2,7 @@
 
 Drum Machine is a set of drum pads and looping samples you play from the keyboard.
 
-<img src="images/drums.webp" alt="Drum Machine with a loop playing: the heading Drums over a three-by-three grid of green pads labeled Q W E, A S D and Z X C, and a toolbar along the bottom with the pause button, the reverse button, the sample menu set to 3 - Loop, the speed slider at 1x and the volume slider, above a green progress bar, with a Help button in the top right corner" width="480">
+<p align="center"><img src="images/drums.webp" alt="Drum Machine with a loop playing: the heading Drums over a three-by-three grid of green pads labeled Q W E, A S D and Z X C, and a toolbar along the bottom with the pause button, the reverse button, the sample menu set to 3 - Loop, the speed slider at 1x and the volume slider, above a green progress bar, with a Help button in the top right corner" width="480"></p>
 
 ## Drum pads
 
