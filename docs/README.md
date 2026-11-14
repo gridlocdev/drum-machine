@@ -7,6 +7,7 @@ These pages cover playing Drum Machine and working on its code.
 - [Getting started](getting-started.md): what you need, and how to play online, run it from source or host it with Docker.
 - [Features](features.md): the drum pads, the sample loops and the transport controls.
 - [Controls](controls.md): every key and button.
+- [Credits](credits.md): where the drum sounds and loops come from.
 
 ## Working on Drum Machine
 

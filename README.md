@@ -20,7 +20,7 @@ See [Getting started](docs/getting-started.md) for requirements and other ways t
 
 ## Learn more
 
-- [Features](docs/features.md) · [Controls](docs/controls.md)
+- [Features](docs/features.md) · [Controls](docs/controls.md) · [Credits](docs/credits.md)
 - [All documentation](docs/README.md) · [Working on the code](docs/development.md)
 
 ## License
