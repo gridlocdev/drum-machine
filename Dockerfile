@@ -7,6 +7,7 @@ WORKDIR /app
 # Copy static files
 COPY index.html ./
 COPY main.js ./
+COPY audio-context.js ./
 COPY style.css ./
 COPY assets/ ./assets/
 COPY components/ ./components/

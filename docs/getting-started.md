@@ -34,8 +34,6 @@ docker run -p 8080:8080 drum-machine
 
 Then open http://localhost:8080.
 
-The `Dockerfile` doesn't copy `audio-context.js` yet, so the page it serves doesn't work until `COPY audio-context.js ./` is added next to the other `COPY` lines.
-
 ## First run
 
 Press a letter key, such as `Z` for the kick, to hear a drum. Then press `1` to start the first loop and play the drums over it. Press `?` or the **Help** button at any time to see every shortcut. Browsers start the sound only after your first click or key press. Nothing is saved between visits.

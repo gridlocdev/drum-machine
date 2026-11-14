@@ -58,4 +58,3 @@ docker build -t drum-machine .
 docker run -p 8080:8080 drum-machine   # then open http://localhost:8080
 ```
 
-The `Dockerfile` doesn't copy `audio-context.js` yet, so the page it serves doesn't work until `COPY audio-context.js ./` is added next to the other `COPY` lines.
