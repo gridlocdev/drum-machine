@@ -38,6 +38,7 @@ section[name="drums"] {
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .toolbar-controls {
@@ -70,6 +71,7 @@ section[name="drums"] {
   display: flex;
   align-items: center;
   gap: 8px;
+  line-height: 1;
   background: #222;
   color: #00c09d;
   border: 2px solid #00c09d;
@@ -92,7 +94,6 @@ section[name="drums"] {
 .samples-arrow {
   margin-left: auto;
   font-size: 0.9em;
-  line-height: 1;
 }
 
 .sample-progress-track {
@@ -459,6 +460,23 @@ kbd {
   min-width: 1.4em;
   text-align: center;
   margin-right: 6px;
+}
+
+/* In a narrow window the two sides can't both be as wide as the controls on the right, so the
+   sample menu gives up exact centering instead of pushing the volume slider off the edge. */
+@media (max-width: 860px) {
+  .toolbar-controls {
+    grid-template-columns: auto auto 1fr;
+  }
+}
+
+/* Narrower still, the controls wrap onto a second row. */
+@media (max-width: 660px) {
+  .toolbar-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 /* Hide on touch devices */
