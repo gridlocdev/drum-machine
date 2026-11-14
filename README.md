@@ -22,3 +22,7 @@ See [Getting started](docs/getting-started.md) for requirements and other ways t
 
 - [Features](docs/features.md) · [Controls](docs/controls.md)
 - [All documentation](docs/README.md) · [Working on the code](docs/development.md)
+
+## License
+
+[MIT](LICENSE)
