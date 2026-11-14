@@ -2,7 +2,7 @@
 
 Play drums with your keyboard: nine drum pads on the letter keys, and nine looping samples on the number keys that you can pause, slow down, speed up and play backwards.
 
-<p align="center"><img src="docs/images/drums.webp" alt="The Drums section: the heading Drums over a three-by-three grid of green square pads labeled with their keys, Q W E on the top row, A S D in the middle and Z X C at the bottom, on a dark background" width="420"></p>
+![Drum Machine with a loop playing: the heading Drums over a three-by-three grid of green pads labeled Q W E, A S D and Z X C, and a toolbar along the bottom with the pause button, the reverse button, the sample menu set to 3 - Loop, the speed slider at 1x and the volume slider, above a green progress bar, with a Help button in the top right corner](docs/images/drums.webp)
 
 - **Nine drum pads.** Press `Q` `W` `E`, `A` `S` `D` or `Z` `X` `C`, or click a pad, to play an 808, a kick, a snare, hats, a clap and more.
 - **Nine looping samples.** Press `1` to `9`, or pick one from **-- Select a sample --**, to loop it under your drumming.
